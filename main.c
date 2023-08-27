@@ -18,6 +18,10 @@ int main(int argc, char ** argv) {
 
 	int fc = (argc - 1);
 	nnucat_file * files = malloc(sizeof(nnucat_file) * fc);
+	if (!files) {
+		fprintf(stderr, "%s\n", errno ? strerror(errno) : "Memory error");
+		return 1;
+	}
 	for (int i = 0; i < fc; i++) {
 		files[i].name = argv[i + 1];
 		files[i].file = fopen(files[i].name, "rb");
